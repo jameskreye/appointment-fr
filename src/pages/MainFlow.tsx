@@ -1,0 +1,72 @@
+import { useEffect, useState } from "react";
+import Header from "../components/ui/Header";
+import ZipCodeForm from "../features/availability/components/ZipCodeForm";
+import EmailFallbackForm from "./EmailFallbackForm";
+import ServiceSelection from "../features/availableServices/ServiceSelection";
+import SelectedService from "../features/availableServices/SelectedService";
+import BookingForm from "../features/appointments/components/BookingForm";
+import type { BookingFormData } from "../features/types";
+import { useBooking } from "../context/BookingContext";
+
+const MainFlow = () => {
+
+  const {updateBooking, data} = useBooking();
+
+  const [step, setStep] = useState<number>(() => {
+    const saved = localStorage.getItem("step");
+    return saved ? parseInt(saved) : 1;
+  });
+
+  const [isAvailable, setIsAvailable] = useState(true);
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+    null
+  );
+
+  useEffect(() => {
+    localStorage.setItem("step", step.toString());
+  }, [step]);
+
+  
+  const handleZipSubmit = (available: boolean, zipcode: string) => {
+    setIsAvailable(available);
+    updateBooking({zipcode})
+    setStep(available ? 2 : 99); // 99 = unavailable page
+  };
+
+  const back = () => setStep((prev) => prev - 1);
+  const next = () => setStep((prev) => prev + 1);
+  const progress = step === 99 ? 1 : step / 4;
+
+  const handleBookingSubmit = (formData: BookingFormData) => {
+    console.log('Booking confirmed:', formData)
+    console.log('whats in booking sor far: ', data)
+  }
+
+  const handleSelectedService = (serviceId: string | null) => {
+    updateBooking({serviceId})
+  }
+
+  return (
+    <div>
+      <Header progress={progress} />
+
+      {step === 1 && <ZipCodeForm onSubmit={handleZipSubmit} />}
+      {step === 2 && (
+        <ServiceSelection
+          onNext={next}
+          onSelectCategory={(id) => setSelectedCategoryId(id)}
+        />
+      )}
+       {step === 3 && selectedCategoryId && (
+        <SelectedService onNext={next} onBack={back} category_id={selectedCategoryId} 
+        onSelectedService={handleSelectedService}
+        />
+      )}
+      {step === 4 && <BookingForm onSubmit={handleBookingSubmit} />}
+      {step === 99 && <EmailFallbackForm />}
+    </div>
+  );
+};
+
+export default MainFlow;
