@@ -5,12 +5,12 @@ import EmailFallbackForm from "./EmailFallbackForm";
 import ServiceSelection from "../features/availableServices/ServiceSelection";
 import SelectedService from "../features/availableServices/SelectedService";
 import BookingForm from "../features/appointments/components/BookingForm";
-import type { BookingFormData } from "../features/types";
 import { useBooking } from "../context/BookingContext";
 
 const MainFlow = () => {
 
-  const {updateBooking, data} = useBooking();
+  const { updateBooking } = useBooking();
+ 
 
   const [step, setStep] = useState<number>(() => {
     const saved = localStorage.getItem("step");
@@ -27,7 +27,7 @@ const MainFlow = () => {
     localStorage.setItem("step", step.toString());
   }, [step]);
 
-  
+
   const handleZipSubmit = (available: boolean, zipcode: string) => {
     setIsAvailable(available);
     updateBooking({zipcode})
@@ -36,12 +36,7 @@ const MainFlow = () => {
 
   const back = () => setStep((prev) => prev - 1);
   const next = () => setStep((prev) => prev + 1);
-  const progress = step === 99 ? 1 : step / 4;
-
-  const handleBookingSubmit = (formData: BookingFormData) => {
-    console.log('Booking confirmed:', formData)
-    console.log('whats in booking sor far: ', data)
-  }
+  const progress = step === 99 ? 1 : step / 5;
 
   const handleSelectedService = (serviceId: string | null) => {
     updateBooking({serviceId})
@@ -63,7 +58,7 @@ const MainFlow = () => {
         onSelectedService={handleSelectedService}
         />
       )}
-      {step === 4 && <BookingForm onSubmit={handleBookingSubmit} />}
+      {step === 4 && <BookingForm />}
       {step === 99 && <EmailFallbackForm />}
     </div>
   );

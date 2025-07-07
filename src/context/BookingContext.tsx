@@ -24,7 +24,7 @@ const defaultBookingData: BookingData = {
 };
 
 interface BookingContextType {
-  data: BookingData;
+  bookingData: BookingData;
   updateBooking: (updates: Partial<BookingData>) => void;
   resetBooking: () => void;
 }
@@ -38,7 +38,7 @@ export const useBooking = () => {
 };
 
 export const BookingProvider = ({ children }: {children: ReactNode}) => {
-    const [data, setData] = useState<BookingData>(defaultBookingData);
+    const [bookingData, setData] = useState<BookingData>(defaultBookingData);
 
     const updateBooking = (updates: Partial<BookingData>) => {
         setData((prev) => ({...prev, ...updates}));
@@ -47,7 +47,7 @@ export const BookingProvider = ({ children }: {children: ReactNode}) => {
     const resetBooking = () => setData(defaultBookingData);
 
     return (
-        <BookingContext.Provider value={{data, updateBooking, resetBooking}}>
+        <BookingContext.Provider value={{bookingData, updateBooking, resetBooking}}>
             {children}
         </BookingContext.Provider>
     );
