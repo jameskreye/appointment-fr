@@ -12,10 +12,14 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
 
-    /* Linting */
+    /* Fix for project references: MUST be present */
+    "composite": true,
+    "noEmit": false,
+    "outDir": "dist",
+
+    /* JSX + Linting */
+    "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
