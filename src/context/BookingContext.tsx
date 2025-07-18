@@ -10,6 +10,7 @@ export interface BookingData {
   images?: File[];
   date: Date | null;
   serviceId: string | null;
+  categoryId: string | null; 
 }
 
 const defaultBookingData: BookingData = {
@@ -21,6 +22,7 @@ const defaultBookingData: BookingData = {
   images: [],
   date: null,
   serviceId: "",
+  categoryId: ""
 };
 
 interface BookingContextType {

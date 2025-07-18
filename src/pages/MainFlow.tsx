@@ -25,7 +25,7 @@ const MainFlow = () => {
 
   useEffect(() => {
     localStorage.setItem("step", step.toString());
-  }, [step]);
+  }, [step, selectedCategoryId]);
 
 
   const handleZipSubmit = (available: boolean, zipcode: string) => {
@@ -39,7 +39,8 @@ const MainFlow = () => {
   const progress = step === 99 ? 1 : step / 5;
 
   const handleSelectedService = (serviceId: string | null) => {
-    updateBooking({serviceId})
+    const categoryId = selectedCategoryId === import.meta.env.VITE_CATEGORY_TYPE ? 'PICKUP': 'OTHER'
+    updateBooking({serviceId, categoryId})
   }
 
   return (

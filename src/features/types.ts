@@ -51,7 +51,7 @@ export const schema = z.object({
   phone: z.string().regex(/^[+]?\d{7,15}$/, "Invalid phone number"),
   date: z.date({ required_error: "Date is required" }),
   images: z.array(z.any()).optional(),
-  notes: z.string().optional(),
+  notes: z.string().optional(), 
 });
 
 export type BookingFormData = z.infer<typeof schema>;
