@@ -239,7 +239,7 @@ const BookingForm = ({ onBackToServices }: bookingFormProps) => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 mt-3">
+    <div className="max-w-3xl mx-auto px-6 mt-3 mb-8">
       <BackButton onClick={onBackToServices} />
 
       <form

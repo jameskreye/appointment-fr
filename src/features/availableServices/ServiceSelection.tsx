@@ -41,7 +41,7 @@ const ServiceSelection = ({
   if (loading) return <p>Loading service...</p>;
 
    return (
-    <div className="min-h-screen bg-[#f9f6f2] py-10 px-4">
+    <div className="py-10 px-4 pb-8 h-full">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-2 text-center">
           What type of service do you need?

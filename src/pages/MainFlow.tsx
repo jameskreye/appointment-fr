@@ -6,6 +6,7 @@ import ServiceSelection from "../features/availableServices/ServiceSelection";
 import SelectedService from "../features/availableServices/SelectedService";
 import BookingForm from "../features/appointments/components/RefactoredBookingForm";
 import { useBooking } from "../context/BookingContext";
+import Footer from "../components/ui/Footer";
 
 const MainFlow = () => {
 
@@ -45,23 +46,27 @@ const MainFlow = () => {
   }
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Header progress={progress} />
-
-      {step === 1 && <ZipCodeForm onSubmit={handleZipSubmit} />}
-      {step === 2 && (
-        <ServiceSelection
-          onNext={next}
-          onSelectCategory={(id) => setSelectedCategoryId(id)}
-        />
-      )}
-       {step === 3 && selectedCategoryId && (
-        <SelectedService onNext={next} onBack={back} category_id={selectedCategoryId} 
-        onSelectedService={handleSelectedService}
-        />
-      )}
-      {step === 4 && <BookingForm onBackToServices={backToServices}/>}
-      {step === 99 && <EmailFallbackForm />}
+      
+      <div className="flex-1 bg-[#f9f6f2]">
+        {step === 1 && <ZipCodeForm onSubmit={handleZipSubmit} />}
+        {step === 2 && (
+          <ServiceSelection
+            onNext={next}
+            onSelectCategory={(id) => setSelectedCategoryId(id)}
+          />
+        )}
+         {step === 3 && selectedCategoryId && (
+          <SelectedService onNext={next} onBack={back} category_id={selectedCategoryId} 
+          onSelectedService={handleSelectedService}
+          />
+        )}
+        {step === 4 && <BookingForm onBackToServices={backToServices}/>}
+        {step === 99 && <EmailFallbackForm />}
+      </div>
+      
+      <Footer />
     </div>
   );
 };

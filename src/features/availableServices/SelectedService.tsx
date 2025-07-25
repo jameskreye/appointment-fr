@@ -43,7 +43,7 @@ interface SelectedServiceProps {
     if (loading || !service) return <p className="text-center mt-10">Loading...</p>;
 
     return (
-      <div className="min-h-screen bg-[#f9f6f2] py-10 px-4">
+      <div className="py-10 px-4 pb-8">
         <div className="max-w-2xl mx-auto">
           <BackButton onClick={onBack}/>
 
