@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { CategoryResponse } from "../types";
 import { getServiceByCategory } from "../availability/availabilityService";
-import { ArrowLeft } from "lucide-react";
+import BackButton from "../../components/ui/BackButton";
 
 interface SelectedServiceProps {
     onNext: () => void;
@@ -45,13 +45,7 @@ interface SelectedServiceProps {
     return (
       <div className="min-h-screen bg-[#f9f6f2] py-10 px-4">
         <div className="max-w-2xl mx-auto">
-          <button
-            onClick={onBack}
-            className="flex items-center text-green-700 font-medium mb-6 hover:underline"
-          >
-            <ArrowLeft className="mr-2" size={18} />
-            Back to services
-          </button>
+          <BackButton onClick={onBack}/>
 
           <h3 className="text-3xl font-bold mb-2 text-center">
             What type of {service?.category.title} service are you interested in?

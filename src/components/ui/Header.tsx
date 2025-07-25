@@ -10,11 +10,11 @@ const Header: React.FC<HeaderProps> = ({ progress }) => {
       
       <header className="bg-white shadow-sm p-2">
         <div className="flex items-center justify-between">
-          <img src={lovensTate} alt="Logo" className="h-25" />
+          <img src={lovensTate} alt="Logo" className="h-25 filter hue-rotate-90 saturate-75 brightness-110" />
         </div>
-        <div className="h-1 bg-gray-200">
+        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
           <div
-            className="h-1 bg-black transition-all duration-300"
+            className="h-2 bg-gradient-to-r from-green-500 to-green-600 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progress * 100}%` }}
           />
         </div>

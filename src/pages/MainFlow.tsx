@@ -4,7 +4,7 @@ import ZipCodeForm from "../features/availability/components/ZipCodeForm";
 import EmailFallbackForm from "./EmailFallbackForm";
 import ServiceSelection from "../features/availableServices/ServiceSelection";
 import SelectedService from "../features/availableServices/SelectedService";
-import BookingForm from "../features/appointments/components/BookingForm";
+import BookingForm from "../features/appointments/components/RefactoredBookingForm";
 import { useBooking } from "../context/BookingContext";
 
 const MainFlow = () => {
@@ -36,6 +36,7 @@ const MainFlow = () => {
 
   const back = () => setStep((prev) => prev - 1);
   const next = () => setStep((prev) => prev + 1);
+  const backToServices = () => setStep((prev) => prev - 2); // goes direct to services
   const progress = step === 99 ? 1 : step / 5;
 
   const handleSelectedService = (serviceId: string | null) => {
@@ -59,7 +60,7 @@ const MainFlow = () => {
         onSelectedService={handleSelectedService}
         />
       )}
-      {step === 4 && <BookingForm />}
+      {step === 4 && <BookingForm onBackToServices={backToServices}/>}
       {step === 99 && <EmailFallbackForm />}
     </div>
   );
